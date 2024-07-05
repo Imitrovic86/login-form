@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Form</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="form-container">
+        <form id="login-form">
+            <div class="input-field" id="username-field">
+                <label for="username">Username:</label>
+                <input type="text" id="username">
+                <i class="fas fa-check" id="username-valid"></i>
+                <i class="fas fa-times" id="username-invalid"></i>
+            </div>
+            <div class="input-field" id="password-field">
+                <label for="password">Password:</label>
+                <input type="password" id="password">
+                <i class="fas fa-check" id="password-valid"></i>
+                <i class="fas fa-times" id="password-invalid"></i>
+            </div>
+            <button type="button" onclick="validateForm()">Login</button>
+            <p id="message"></p>
+        </form>
+    </div>
+
+    <script>
+        function validateForm() {
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value.trim();
+            const usernameField = document.getElementById('username-field');
+            const passwordField = document.getElementById('password-field');
+            const usernameValidIcon = document.getElementById('username-valid');
+            const usernameInvalidIcon = document.getElementById('username-invalid');
+            const passwordValidIcon = document.getElementById('password-valid');
+            const passwordInvalidIcon = document.getElementById('password-invalid');
+            const message = document.getElementById('message');
+
+
+            usernameValidIcon.style.visibility = 'hidden';
+            usernameInvalidIcon.style.visibility = 'hidden';
+            passwordValidIcon.style.visibility = 'hidden';
+            passwordInvalidIcon.style.visibility = 'hidden';
+
+            usernameField.classList.remove('valid', 'invalid');
+            passwordField.classList.remove('valid', 'invalid');
+            message.textContent = '';
+
+            let isUsernameValid = false;
+            let isPasswordValid = false;
+
+
+            if (username === 'new_user') {
+                usernameField.classList.add('valid');
+                usernameValidIcon.style.visibility = 'visible';
+                isUsernameValid = true;
+            } else {
+                usernameField.classList.add('invalid');
+                usernameInvalidIcon.style.visibility = 'visible';
+            }
+
+
+            if (password === '123456789') {
+                passwordField.classList.add('valid');
+                passwordValidIcon.style.visibility = 'visible';
+                isPasswordValid = true;
+            } else {
+                passwordField.classList.add('invalid');
+                passwordInvalidIcon.style.visibility = 'visible';
+            }
+
+
+            if (isUsernameValid && isPasswordValid) {
+                message.textContent = 'Successful login!';
+                message.classList.remove('error-message');
+                message.classList.add('success-message');
+            } else {
+                message.textContent = 'Please enter valid username and password';
+                message.classList.remove('success-message');
+                message.classList.add('error-message');
+            }
+        }
+    </script>
+</body>
+
+</html>
